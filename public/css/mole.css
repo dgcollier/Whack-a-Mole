@@ -25,6 +25,7 @@
     border: solid #bf5700 10px;
     margin-left: auto;
     margin-right: auto;
+    cursor: url(/img/helmet.png), pointer;
 }
 
 #start {
@@ -63,10 +64,6 @@ button {
     position: fixed;
     left: 100px; 
     width: 200px;   
-}
-
-img {
-    background-color: white;
 }
 
 .btn:active,
