@@ -9,41 +9,132 @@
 
     </head>
     <body>
-        <h1 id="title">Whack-a-Sooner!</h1>
+        <h1 id="title">Whack-a-<img src="/img/big12.png">!</h1>
 
         <div id="wrapper" class="well">
-            <div id="0" class="box"></div>
-            <div id="1" class="box"></div>
-            <div id="2" class="box"></div>
-            <div id="3" class="box"></div>
-            <div id="4" class="box"></div>
-            <div id="5" class="box"></div>
-            <div id="6" class="box"></div>
-            <div id="7" class="box"></div>
-            <div id="8" class="box"></div>
+            <div class="box">
+                <img id="0" class="thumb" src="/img/osu.png">
+            </div>
+            <div class="box">
+                <img id="1" class="thumb" src="/img/tcu.png">
+            </div>
+            <div class="box">
+                <img id="2" class="thumb" src="/img/oklahoma.png">
+            </div>
+            <div class="box">
+                <img id="3" class="thumb" src="/img/k_state.png">
+            </div>
+            <div class="box">
+                <img id="4" class="thumb" src="/img/iowa_state.png">
+            </div>
+            <div class="box">
+                <img id="5" class="thumb" src="/img/kansas.png">
+            </div>
+            <div class="box">
+                <img id="6" class="thumb" src="/img/wvu.png">
+            </div>
+            <div class="box">
+                <img id="7" class="thumb" src="/img/tech.png">
+            </div>
+            <div class="box">
+                <img id="8" class="thumb" src="/img/baylor.png">
+            </div>
         </div>
 
+        <img id="horns" src="/img/texas.png">
         <button id="start" class="btn btn-lg">Start Game</button>
+        <button id="score" class="btn btn-lg">Score:</button>
+        <button id="quit" class="btn btn-lg">Quit Game</button>
+        <button id="high-score" class="btn btn-lg">High Score:</button>
+        <button id="timer" class="btn btn-lg">Time:</button>
         <!-- <script type="text/javascript" src="/js/mole.js"></script> -->
 
         <script type="text/javascript">
 
-        $("#start").click(function () {
-            selectRandomBox();
-        });
+            $(document).ready(function () {
+                $(".thumb").hide();
+                startButtonOn();
+            });
 
-        function selectRandomBox () {
-            var random = Math.floor(Math.random() * 9);
+            function startButtonOn () {
+                $("#start").on("click", start);
+            };
+
+            function startButtonOff () {
+                $("#start").off("click", start);
+            };
+
+            function selectNewBox () {
+
+                randomizer = setInterval(function () {
+                    
+                    $(".thumb").fadeOut(250);
+
+                    var random = Math.floor(Math.random() * boxes.length);
+                    var box = $(boxes[random]);
+                    // console.log(box);
+
+                    box.children().fadeIn(200);
+                }, 710);
+            };
+
+            function start () {
+                startButtonOff();
+                score = 0;
+
+                $("#score").text("Score: " + score);
+                selectNewBox();
+
+                counter = 20;
+                var i = 0;
+                countdown = setInterval(function () {
+                    $("#timer").text("Timer: " + counter--);
+                    i++;
+                    if (counter == -1) {
+                        clearInterval(countdown);
+                        clearInterval(randomizer);
+                        endGame(); 
+                    }
+                }, 1000);
+            };
+
+            function endGame () {
+                $(".thumb").hide();
+                alert("You scored " + score + ". Your high score is: " + highScore + "!");
+                $("#start").text("Start New Game");
+                startButtonOn();
+            };
+
+            function quit () {
+                var quit = confirm("Are you sure you want to quit?");
+                if (quit) {
+                    location.reload(true);
+                }
+            };
+
+            var score = 0;
+            var highScore = 0;
             var boxes = $(".box");
-            var moleHole = boxes[random];
-            var id = moleHole.id;
-            console.log(id);
-            // showMole($("#" + id);
-        };
+            var counter;
+            var countdown;
+            var randomizer;
 
-        function showMole () {
+            $(".thumb").click(function(){
+                ++score;
+                $("#score").text("Score: " + score);
+                $(this).hide();
 
-        };
+                if(score > highScore) {
+                    $("#high-score").text("High Score: " + score);
+                    highScore += 1;
+                } else {
+                    $("#high-score").text("High Score: " + highScore);
+                }
+            });
+
+            $("#quit").click(function () {
+                quit();
+            });
 
         </script>
     </body>
