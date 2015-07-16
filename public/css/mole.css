@@ -15,6 +15,14 @@
     opacity: 0;
 }
 
+.mouseUp {
+    cursor: url(/img/helmet.png), pointer;
+}
+
+.mouseDown {
+    cursor: url(/img/helmet2.png), pointer;
+}
+
 #title {
     font-size: 48px;
 }
@@ -25,7 +33,6 @@
     border: solid #bf5700 10px;
     margin-left: auto;
     margin-right: auto;
-    cursor: url(/img/helmet.png), pointer;
 }
 
 #start {
