@@ -6,7 +6,6 @@ $(document).ready(function () {
 });
 
 // $("#wrapper").mousedown(helmetDown);
-// $("#wrapper").mouseup(helmetUp);
 
 function startButtonOn () {
     $("#start").on("click", start);
