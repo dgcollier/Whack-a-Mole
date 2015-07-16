@@ -5,7 +5,8 @@ $(document).ready(function () {
     startButtonOn();
 });
 
-// $("#wrapper").mousedown(helmetDown);
+$("#wrapper").mousedown(helmetDown);
+$("#wrapper").mouseup(helmetUp);
 
 function startButtonOn () {
     $("#start").on("click", start);
@@ -15,9 +16,15 @@ function startButtonOff () {
     $("#start").off("click", start);
 };
 
-// function helmetDown () {
-    
-// };
+function helmetDown () {
+    $(this).removeClass("mouseUp");
+    $(this).addClass("mouseDown"); 
+};
+
+function helmetUp () {
+    $(this).removeClass("mouseDown");
+    $(this).addClass("mouseUp"); 
+};
 
 function selectNewBox () {
 
