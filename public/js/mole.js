@@ -86,7 +86,7 @@ function quit () {
 
 function displayHighScore () {
     $("#high-score").text("High Score: " + highScore);
-}
+};
 
 var score = 0;
 var highScore = 0;
@@ -97,7 +97,8 @@ var randomizer;
 $(".thumb").click(function(){
     ++score;
     $("#score").text("Score: " + score);
-    $(this).hide();
+    
+    $(this).hide();   
 
     if(score > highScore) {
         highScore++;
